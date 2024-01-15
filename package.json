@@ -1,27 +1,40 @@
 {
-	"name": "react-electron-template",
-	"version": "1.2.1",
+	"name": "create-electron-with-react",
+	"version": "1.2.6",
 	"description": "This tool allows you to effortlessly fetch boilerplate code for various programming projects, saving you time and eliminating setup complexities. Choose from versatile templates that integrate popular technologies like ReactJS, Tailwind CSS, Electron, and TypeScript.",
 	"main": "index.js",
 	"type": "module",
 	"bin": {
-		"create-template": "./index.js"
+		"create-template": "index.js",
+		"create-electron-with-react": "index.js"
 	},
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/Strahinja2112/cli-templates"
+		"url": "git+https://github.com/Strahinja2112/cli-templates.git"
 	},
 	"author": "Strahinja Pavicevic",
 	"license": "ISC",
 	"bugs": {
 		"url": "https://github.com/Strahinja2112/cli-templates/issues"
 	},
+	"keywords": [
+		"ReactJS",
+		"Electron",
+		"Desktop Development",
+		"Vite",
+		"Tailwind",
+		"TailwindCSS",
+		"Modern Desktop Development",
+		"React Template",
+		"React Boilerplate"
+	],
 	"homepage": "https://github.com/Strahinja2112/cli-templates#readme",
 	"dependencies": {
-		"inquirer": "^8.0.0"
+		"inquirer": "^8.0.0",
+		"npmlog": "^7.0.1"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.13.10",

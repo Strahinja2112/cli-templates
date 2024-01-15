@@ -1,12 +1,18 @@
-#!/usr/bin/env node
-
 import inquirer from "inquirer";
 import * as fs from "fs";
 import { dirname } from "path";
 import { fileURLToPath } from "url";
+import { exec } from "child_process";
 import createDirectoryContents from "./createDirectoryContents.js";
+import npmlog from "npmlog";
+
 const CURR_DIR = process.cwd();
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
+
+npmlog.heading = "project-generator";
+npmlog.addLevel("info", 2000, { fg: "green" });
+npmlog.addLevel("error", 4000, { fg: "red", bold: true });
 
 const descriptions = {
 	evrt2: "Electron Vite React Typescript Tailwind",
@@ -33,20 +39,67 @@ const QUESTIONS = [
 				return "Project name may only include letters, numbers, underscores and hashes.";
 		},
 	},
+	{
+		name: "run-install",
+		message: "Would you like us to run `npm install` for you?",
+		type: "confirm",
+	},
 ];
 
 inquirer.prompt(QUESTIONS).then((answers) => {
 	const projectChoice = answers["project-choice"].split(" - ")[0];
 	const projectName = answers["project-name"];
+	const shouldRunInstall = answers["run-install"];
+
 	const templatePath = `${__dirname}/templates/${projectChoice}`;
 	try {
-		fs.mkdirSync(`${CURR_DIR}/${projectName}`);
+		const newProjectPath = `${CURR_DIR}/${projectName}`;
+
+		npmlog.level = shouldRunInstall ? "verbose" : "info";
+
+		npmlog.info("Creating project directory...");
+		fs.mkdirSync(newProjectPath);
 		createDirectoryContents(templatePath, projectName);
 
-		console.log(`\nProject created in /${projectName}`);
-		console.log("\nNow all that is left to do is: ");
-		console.log(`cd ${projectName} && yarn && yarn dev`);
+		if (shouldRunInstall) {
+			npmlog.info("Running `yarn install`...");
+			const installProcess = exec(
+				"yarn",
+				{ cwd: newProjectPath },
+				(error, stdout) => {
+					if (error) {
+						npmlog.error("Error during installation:", error.message);
+						throw error;
+					}
+
+					npmlog.info(stdout);
+					npmlog.info("Your project is done! You can just run `yarn dev`");
+					npmlog.info(`\nProject created in /${projectName}`);
+				}
+			);
+
+			installProcess.stdout.pipe(npmlog.stream);
+			installProcess.stderr.pipe(npmlog.stream);
+		} else {
+			npmlog.info("\nNow all that is left to do is: ");
+			npmlog.info(`cd ${projectName} && yarn && yarn dev`);
+		}
 	} catch (error) {
-		console.error(error);
+		npmlog.error(getErrorMessage(error));
 	}
 });
+
+function getErrorMessage(error) {
+	let message = "";
+	if (error instanceof Error) {
+		message = error.message;
+	} else if (error && typeof error === "object" && "message" in error) {
+		message = String(error.message);
+	} else if (typeof error === "string") {
+		message = error;
+	} else {
+		message = "Something went wrong!";
+	}
+
+	return message;
+}

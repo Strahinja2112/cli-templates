@@ -1,5 +1,5 @@
 <h1 align="center" style="font-size: 35px; margin-block: 20px;">
-  <a href="https://portfolio-strahinja.vercel.app">Electron, React, Vite, Tailwind and Typescript</a>
+  <a href="#">Electron, React, Vite, Tailwind and Typescript</a>
 </h1>
 <p align="center">
   <a style="font-size: 25px;" href="https://github.com/strahinja2112/cli-templates"><strong>Explore the repo »</strong></a>
@@ -16,6 +16,8 @@
 ```bash
 # Example command for all templates from which you can choose one that you need
 npx create-template
+# or
+npx create-electron-with-react
 # choose one of the given options, or example this one
 ? evrt2 - Electron Vite React Typescript Tailwind
 ? Project name: test-project

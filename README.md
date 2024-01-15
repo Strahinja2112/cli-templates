@@ -1,4 +1,13 @@
-# Electron, React, Vite, Tailwind and Typescript
+<h1 align="center" style="font-size: 35px; margin-block: 20px;">
+  <a href="https://portfolio-strahinja.vercel.app">Electron, React, Vite, Tailwind and Typescript</a>
+</h1>
+<p align="center">
+  <a style="font-size: 25px;" href="https://github.com/strahinja2112/cli-templates"><strong>Explore the repo »</strong></a>
+  <br/>
+  <a href="https://github.com/strahinja2112/cli-templates/issues">Report Bug</a>
+  .
+  <a href="https://github.com/strahinja2112/cli-templates/issues">Request Feature</a>
+</p>
 
 # Usage
 

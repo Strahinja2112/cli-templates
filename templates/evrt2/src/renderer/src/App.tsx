@@ -17,6 +17,10 @@ const links: TLink[] = [
   {
     title: 'Typescript',
     url: 'https://www.typescriptlang.org'
+  },
+  {
+    title: 'TailwindCSS',
+    url: ''
   }
 ]
 
@@ -45,7 +49,7 @@ export default function App() {
         </a>
       </div>
       <div className="mt-5 flex flex-col w-full items-center gap-3 justify-center">
-        <span className="text-2xl">The best of the TypeScript ecosystem...</span>
+        <span className="text-2xl">The best of the modern TypeScript ecosystem...</span>
         <div className="w-full items-center justify-center flex gap-2 text-sm">
           {links.map((link) => (
             <a
@@ -59,7 +63,7 @@ export default function App() {
           ))}
         </div>
       </div>
-      <div className="fixed bottom-0 pb-1 flex text-white/50 items-start justify-center gap-5">
+      <div className="mt-[60px] pb-1 flex text-white/50 items-start justify-center gap-5">
         <div className="flex items-center text-2xl">
           <span className="text-[rgb(86,154,81)] underline font-bold">E</span>
           <span>lectron</span>
@@ -83,6 +87,16 @@ export default function App() {
             <span>ailwind</span>
           </div>
         </div>
+      </div>
+      <div className="w-full flex fixed bottom-0 itecems-center justify-center">
+        <a
+          target="_blank"
+          className="flex items-center border border-b-0 p-1 px-2 rounded-t-lg jucstify-center gap-1 transition text-[rgb(86,154,81)] border-[rgb(57,104,54)] hover:text-white/80 hover:border-white/80 group"
+          href="https://github.com/Strahinja2112/"
+        >
+          <Github />
+          <span className="text-xl">Visit my github!</span>
+        </a>
       </div>
     </div>
   )

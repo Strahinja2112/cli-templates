@@ -64,7 +64,6 @@ export default function App() {
           ))}
         </div>
       </div>
-      <Button>AD</Button>
       <div className="mt-[100px] pb-1 flex text-white/50 items-start justify-center gap-5">
         <div className="flex items-center text-2xl">
           <span className="text-[rgb(86,154,81)] underline font-bold">E</span>

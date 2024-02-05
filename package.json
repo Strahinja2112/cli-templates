@@ -1,6 +1,6 @@
 {
 	"name": "create-electron-with-react",
-	"version": "1.3.3",
+	"version": "1.3.4",
 	"description": "This tool allows you to effortlessly fetch boilerplate code for various programming projects, saving you time and eliminating setup complexities. Choose from versatile templates that integrate popular technologies like ReactJS, Tailwind CSS, Electron, and TypeScript.",
 	"main": "index.js",
 	"type": "module",

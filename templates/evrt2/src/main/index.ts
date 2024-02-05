@@ -1,20 +1,22 @@
 import { electronApp, is, optimizer } from '@electron-toolkit/utils'
-import { BrowserWindow, app, shell } from 'electron'
-import { join } from 'path'
-import icon from '../../resources/icon.png?asset'
+import { BrowserWindow, app, ipcMain, shell } from 'electron'
+import path, { join } from 'path'
+
+let mainWindow: BrowserWindow | null = null
 
 function createWindow(): void {
-  // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 900,
-    height: 700,
+    height: 600,
+    minWidth: 900,
+    minHeight: 600,
     show: false,
     autoHideMenuBar: true,
-    ...(process.platform === 'linux' ? { icon } : {}),
+    icon: path.join(__dirname, '../../resources/icon.png'),
     center: true,
-    title: 'Electron Vite React Typescript Tailwind Template',
-    frame: true,
-    trafficLightPosition: { x: 15, y: 10 },
+    title: 'Note Manager',
+    transparent: true,
+    frame: false,
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: true,
@@ -23,7 +25,7 @@ function createWindow(): void {
   })
 
   mainWindow.on('ready-to-show', () => {
-    mainWindow.show()
+    mainWindow?.show()
   })
 
   mainWindow.webContents.setWindowOpenHandler((details) => {
@@ -54,6 +56,8 @@ app.whenReady().then(() => {
     optimizer.watchWindowShortcuts(window)
   })
 
+  handleWindowEvents()
+
   createWindow()
 
   app.on('activate', () => {
@@ -74,3 +78,14 @@ app.on('window-all-closed', () => {
 
 // In this file you can include the rest of your app"s specific main process
 // code. You can also put them in separate files and require them here.
+function handleWindowEvents(): void {
+  ipcMain.handle('closeWindow', () => app.quit())
+  ipcMain.handle('minimizeWindow', () => mainWindow?.minimize())
+  ipcMain.handle('maximizeWindow', () => {
+    if (mainWindow?.isMaximized()) {
+      mainWindow?.unmaximize()
+    } else {
+      mainWindow?.maximize()
+    }
+  })
+}
